@@ -1,0 +1,62 @@
+// client/src/components/styles/Header.scss
+@import "./mixins";
+
+.header {
+    background-color: $color-text;
+    color: $color-text-light;
+    padding: $spacing-sm $spacing-md;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
+    
+    &__logo a {
+        color: $color-text-light;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    &__nav {
+        display: flex; // Ukryte na mobile domyślnie
+        
+        @include tablet {
+            display: flex;
+            gap: $spacing-sm;
+            margin: 0 $spacing-md;
+        }
+
+        a {
+            color: $color-text-light;
+            &:hover { color: $color-secondary; text-decoration: none; }
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        
+        button {
+            background: transparent;
+            border: 1px solid $color-primary;
+            color: $color-primary;
+            padding: 4px 8px;
+
+            &:hover {
+                background-color: $color-primary;
+                color: $color-text-light;
+            }
+        }
+        
+        @include mobile {
+            width: 100%;
+            justify-content: flex-end;
+            margin-top: $spacing-xs;
+        }
+    }
+    
+    &__cart {
+        color: $color-secondary;
+        font-weight: bold;
+    }
+}

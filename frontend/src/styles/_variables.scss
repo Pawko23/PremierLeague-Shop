@@ -1,0 +1,23 @@
+// client/src/styles/_variables.scss
+
+// Breakpointy
+$breakpoint-mobile: 599px;
+$breakpoint-tablet: 1023px;
+$breakpoint-desktop: 1024px;
+
+// Kolory
+$color-primary: #e31b23; // Czerwień Premier League
+$color-secondary: #00ff87; // Neonowa zieleń (akcent)
+$color-background: #f4f4f4;
+$color-text: #333;
+$color-text-light: #fff;
+$color-border: #ddd;
+
+// Typografia
+$font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+// Paddingi i Marginesy
+$spacing-xs: 8px;
+$spacing-sm: 16px;
+$spacing-md: 24px;
+$spacing-lg: 40px;

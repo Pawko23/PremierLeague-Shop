@@ -1,0 +1,99 @@
+// client/src/components/admin/styles/ProductForm.scss
+@import "../../styles/mixins";
+
+.product-form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background: white;
+    border-radius: 8px;
+    
+    h3 {
+        color: $color-primary;
+        margin-bottom: $spacing-md;
+    }
+    
+    label {
+        font-weight: bold;
+        margin-top: $spacing-xs;
+    }
+
+    input[type="text"], input[type="number"], input[type="url"], textarea {
+        padding: $spacing-xs;
+        border: 1px solid $color-border;
+        border-radius: 4px;
+    }
+
+    textarea {
+        min-height: 100px;
+    }
+
+    .variant-group {
+        border: 1px dashed $color-border;
+        padding: $spacing-sm;
+        border-radius: 4px;
+        margin-top: $spacing-sm;
+
+        h5 {
+            color: $color-secondary;
+            margin-bottom: $spacing-xs;
+        }
+    }
+    
+    .image-url-field {
+        display: flex;
+        gap: $spacing-xs;
+        margin-bottom: $spacing-xs;
+        
+        input[type="url"] {
+            flex-grow: 1;
+        }
+    }
+
+    .remove-image-button {
+        background-color: $color-primary;
+        color: white;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        line-height: 30px;
+        flex-shrink: 0;
+    }
+
+    .add-image-button {
+        background-color: lighten($color-secondary, 10%);
+        color: $color-text;
+        border: 1px solid $color-secondary;
+        margin-top: $spacing-xs;
+    }
+
+    .stock-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: $spacing-xs;
+        margin-top: $spacing-sm;
+        
+        .stock-item {
+            display: flex;
+            flex-direction: column;
+            
+            input[type="number"] {
+                text-align: center;
+            }
+        }
+    }
+
+    button[type="submit"] {
+        margin-top: $spacing-md;
+        padding: $spacing-sm;
+    }
+    
+    .back-button {
+        background-color: gray;
+        margin-top: $spacing-xs;
+        &:hover {
+            background-color: darken(gray, 10%);
+        }
+    }
+}

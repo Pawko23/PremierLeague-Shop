@@ -1,0 +1,30 @@
+// client/src/components/styles/ProductFilters.scss
+@import "./mixins";
+
+.product-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    h3 {
+        font-size: 1rem;
+        margin-right: $spacing-xs;
+    }
+
+    select {
+        padding: $spacing-xs;
+        border: 1px solid $color-border;
+        border-radius: 4px;
+    }
+    
+    button {
+        background-color: $color-secondary;
+        color: $color-text;
+        font-weight: bold;
+    }
+}

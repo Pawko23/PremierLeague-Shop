@@ -1,0 +1,95 @@
+// client/src/pages/styles/OrdersHistoryPage.scss
+@import "../../components/styles/mixins";
+@import "../../styles/variables";
+
+.orders-history {
+    max-width: 900px;
+    margin: 0 auto;
+    
+    h1 {
+        text-align: center;
+        color: $color-primary;
+        margin-bottom: $spacing-lg;
+    }
+}
+
+.orders-history--empty {
+    text-align: center;
+    padding: $spacing-lg 0;
+
+    h1 {
+        color: $color-primary;
+    }
+    
+    p {
+        margin: $spacing-sm 0;
+    }
+}
+
+.order-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+    border-left: 5px solid gray; // Domyślny border
+
+    // Stylizacja w zależności od statusu (do zmiany przez PUT /api/admin/orders/:id/status)
+    &--pending {
+        border-left-color: #ffc107; // Żółty (Oczekujące)
+    }
+    &--processing {
+        border-left-color: $color-secondary; // Zielony (W realizacji)
+    }
+    &--shipped {
+        border-left-color: #4CAF50; // Zielony (Wysłane)
+    }
+    &--delivered {
+        border-left-color: $color-primary; // Czerwony (Dostarczone - sukces)
+        box-shadow: 0 4px 10px rgba($color-primary, 0.2);
+    }
+    &--cancelled {
+        border-left-color: #6c757d; // Szary (Anulowane)
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        color: gray;
+        margin-bottom: $spacing-sm;
+        border-bottom: 1px dashed $color-border;
+        padding-bottom: $spacing-xs;
+    }
+
+    &__details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $spacing-sm;
+        
+        p {
+            margin: 0;
+        }
+    }
+    
+    &__status {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    
+    &__items-list {
+        list-style: none;
+        padding: 0;
+        li {
+            padding: 4px 0;
+            font-size: 0.95rem;
+            color: $color-text;
+            border-bottom: 1px dotted lighten($color-border, 5%);
+            
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,56 @@
+// client/src/components/styles/LoginForm.scss
+@import "./mixins";
+
+.login-form-container {
+    max-width: 400px;
+    margin: $spacing-lg auto;
+    padding: $spacing-md;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+
+    h2 {
+        margin-bottom: $spacing-md;
+        color: $color-primary;
+    }
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+
+    input {
+        padding: $spacing-xs;
+        border: 1px solid $color-border;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+    
+    button[type="submit"] {
+        padding: $spacing-sm;
+        font-size: 1rem;
+    }
+}
+
+.error-message {
+    color: $color-primary;
+    background-color: lighten($color-primary, 40%);
+    padding: $spacing-xs;
+    border-radius: 4px;
+}
+
+.toggle-button {
+    background: transparent;
+    color: $color-text;
+    border: none;
+    text-decoration: underline;
+    padding: $spacing-xs 0;
+    font-size: 0.9rem;
+    
+    &:hover {
+        color: $color-primary;
+    }
+}

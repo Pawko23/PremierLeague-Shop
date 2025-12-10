@@ -1,0 +1,25 @@
+// client/src/pages/styles/HomePage.scss
+@import "../../components/styles/mixins";
+
+.homepage h1 {
+    text-align: center;
+    margin-bottom: $spacing-md;
+    color: $color-primary;
+}
+
+.product-grid {
+    display: grid;
+    gap: $spacing-md;
+    padding-top: $spacing-md;
+    
+    // Mobile (default)
+    grid-template-columns: 1fr; 
+
+    @include tablet {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include desktop {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

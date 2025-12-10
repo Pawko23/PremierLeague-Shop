@@ -1,0 +1,11 @@
+// client/src/components/styles/Footer.scss
+@import "./mixins";
+
+.footer {
+    background-color: #000;
+    color: $color-border;
+    text-align: center;
+    padding: $spacing-sm;
+    font-size: 0.8rem;
+    margin-top: auto;
+}

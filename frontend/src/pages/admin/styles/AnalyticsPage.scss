@@ -1,0 +1,53 @@
+// client/src/pages/admin/styles/AnalyticsPage.scss
+@import "../../../components/styles/mixins";
+
+.analytics-page {
+    h2 {
+        color: $color-primary;
+        margin-bottom: $spacing-md;
+    }
+}
+
+.stats-grid {
+    display: grid;
+    gap: $spacing-md;
+    grid-template-columns: 1fr; 
+
+    @include tablet {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.stat-card {
+    background: lighten($color-primary, 45%);
+    padding: $spacing-md;
+    border-radius: 8px;
+    text-align: center;
+    
+    h4 {
+        color: $color-text;
+        font-size: 1rem;
+        margin-bottom: $spacing-xs;
+    }
+    
+    p {
+        font-size: 2rem;
+        font-weight: bold;
+        color: $color-primary;
+    }
+}
+
+.top-products-title {
+    margin-top: $spacing-lg;
+    margin-bottom: $spacing-md;
+    border-bottom: 1px solid $color-border;
+    padding-bottom: $spacing-xs;
+}
+
+.top-products-list {
+    padding-left: $spacing-md;
+    li {
+        margin-bottom: $spacing-xs;
+        font-size: 1.1rem;
+    }
+}

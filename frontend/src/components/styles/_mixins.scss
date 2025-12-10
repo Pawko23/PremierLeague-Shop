@@ -1,0 +1,22 @@
+// client/src/components/styles/_mixins.scss (POPRAWIONE)
+
+@import "../../styles/variables";
+
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  // UWAGA: Używamy nawiasów ( ) do grupowania operacji matematycznych
+  @media (min-width: ($breakpoint-mobile + 1)) and (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}

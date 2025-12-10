@@ -1,0 +1,64 @@
+@import "../../styles/mixins";
+
+.admin-product-list {
+    h3 {
+        margin-bottom: $spacing-md;
+    }
+}
+
+.button-create {
+    display: inline-block;
+    background-color: $color-secondary;
+    color: $color-text;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-bottom: $spacing-md;
+    
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    
+    th, td {
+        padding: $spacing-sm;
+        text-align: left;
+        border-bottom: 1px solid $color-border;
+    }
+    
+    th {
+        background-color: $color-background;
+        font-weight: bold;
+    }
+    
+    .action-button {
+        padding: 5px 10px;
+        margin-right: 5px;
+        font-size: 0.9rem;
+        border-radius: 3px;
+        text-decoration: none;
+
+        &--edit {
+            background-color: #007bff;
+            color: white;
+            &:hover { background-color: darken(#007bff, 10%); }
+        }
+
+        &--delete {
+            background-color: $color-primary;
+            color: white;
+            &:hover { background-color: darken($color-primary, 10%); }
+        }
+    }
+}
+
+.no-products-message {
+    padding: $spacing-lg;
+    text-align: center;
+    border: 1px dashed $color-border;
+    border-radius: 4px;
+}

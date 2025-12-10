@@ -1,0 +1,57 @@
+// client/src/components/styles/ProductCard.scss
+@import "./mixins";
+
+.product-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: $spacing-sm;
+    transition: transform 0.3s;
+    
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &__image {
+        width: 100%;
+        height: auto;
+        display: block;
+        // Upewnienie się, że obrazy koszulek mają podobną wysokość
+        aspect-ratio: 1 / 1.1; 
+        object-fit: cover;
+    }
+
+    &__name {
+        font-size: 1.1rem;
+        margin: $spacing-xs 0;
+        color: $color-text;
+    }
+
+    &__club {
+        color: gray;
+        font-size: 0.9rem;
+    }
+
+    &__price {
+        font-size: 1.2rem;
+        color: $color-primary;
+        font-weight: bold;
+        margin: $spacing-xs 0 $spacing-sm;
+    }
+
+    &__button {
+        display: inline-block;
+        background-color: $color-primary;
+        color: $color-text-light;
+        padding: $spacing-xs $spacing-sm;
+        border-radius: 4px;
+        
+        &:hover {
+            background-color: darken($color-primary, 10%);
+            text-decoration: none;
+        }
+    }
+}

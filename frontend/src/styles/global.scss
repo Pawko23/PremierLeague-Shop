@@ -1,0 +1,61 @@
+// client/src/styles/global.scss
+@import "./variables";
+@import "../components/styles/mixins";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: $font-stack;
+    color: $color-text;
+    background-color: $color-background;
+    line-height: 1.6;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: $color-primary;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+button {
+    cursor: pointer;
+    background-color: $color-primary;
+    color: $color-text-light;
+    border: none;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+
+    &:hover:not(:disabled) {
+        background-color: darken($color-primary, 10%);
+    }
+    
+    &:disabled {
+        background-color: $color-border;
+        cursor: not-allowed;
+    }
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: $spacing-md;
+
+    @include desktop {
+        padding: $spacing-lg $spacing-md;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}

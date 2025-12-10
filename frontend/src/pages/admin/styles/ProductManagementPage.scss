@@ -1,0 +1,17 @@
+// client/src/pages/admin/styles/ProductManagementPage.scss
+// Ten plik może być użyty do stylizacji samego kontenera strony Zarządzania Produktami.
+// Główne style są w ProductList.scss i ProductForm.scss
+@import "../../../components/styles/mixins";
+
+.product-management {
+    .button-create {
+        // Używamy stylów zdefiniowanych w ProductList.scss
+        display: inline-block;
+        margin-bottom: $spacing-md;
+    }
+    
+    // Dodatkowe marginesy dla oddzielenia formularza/listy
+    .product-form, .admin-product-list {
+        margin-top: $spacing-md;
+    }
+}
