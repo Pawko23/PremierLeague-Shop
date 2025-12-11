@@ -1,61 +1,402 @@
-// client/src/styles/global.scss
+// frontend/src/styles/global.scss
+
 @import "./variables";
 @import "../components/styles/mixins";
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+// ============================================
+// RESET & BASE
+// ============================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+
+  @include reduced-motion {
+    scroll-behavior: auto;
+  }
 }
 
 body {
-    font-family: $font-stack;
-    color: $color-text;
-    background-color: $color-background;
-    line-height: 1.6;
+  font-family: $font-stack;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-base;
+  color: $color-text;
+  background-color: $color-background;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 #root {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: $spacing-md;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $color-text;
+}
+
+h1 { @include heading-1; }
+h2 { @include heading-2; }
+h3 { @include heading-3; }
+
+p {
+  margin-bottom: $spacing-md;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 a {
-    color: $color-primary;
-    text-decoration: none;
+  color: #2563eb;
+  text-decoration: none;
+  @include smooth-transition(color, opacity);
 
-    &:hover {
-        text-decoration: underline;
-    }
+  &:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+    text-decoration: underline;
+  }
 }
 
+strong {
+  font-weight: $font-weight-bold;
+}
+
+small {
+  font-size: $font-size-sm;
+}
+
+// ============================================
+// BUTTONS
+// ============================================
+
 button {
-    cursor: pointer;
-    background-color: $color-primary;
+  @include button-reset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  line-height: 1;
+  text-align: center;
+  background-color: #2563eb;
+  color: $color-text-light;
+  border: 2px solid #2563eb;
+  border-radius: $radius-md;
+  cursor: pointer;
+  user-select: none;
+  @include smooth-transition(background-color, border-color, transform, box-shadow);
+
+  &:hover:not(:disabled) {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  &:disabled {
+    background-color: $color-border;
+    border-color: $color-border;
+    color: $color-text-muted;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  // Button variants
+  &.button--secondary {
+    background-color: #7c3aed;
+    border-color: #7c3aed;
     color: $color-text-light;
-    border: none;
-    padding: $spacing-xs $spacing-sm;
-    border-radius: 4px;
-    transition: background-color 0.3s;
 
     &:hover:not(:disabled) {
-        background-color: darken($color-primary, 10%);
+      background-color: #6d28d9;
+      border-color: #6d28d9;
     }
+  }
+
+  &.button--outline {
+    background-color: transparent;
+    color: $color-primary;
+
+    &:hover:not(:disabled) {
+      background-color: $color-primary;
+      color: $color-text-light;
+    }
+  }
+
+  &.button--ghost {
+    background-color: transparent;
+    border-color: transparent;
+    color: $color-text;
+
+    &:hover:not(:disabled) {
+      background-color: $color-surface-hover;
+    }
+  }
+
+  &.button--sm {
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+  }
+
+  &.button--lg {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-lg;
+  }
+
+  @include reduced-motion {
+    transition: none;
     
-    &:disabled {
-        background-color: $color-border;
-        cursor: not-allowed;
+    &:hover {
+      transform: none;
     }
+  }
+}
+
+// ============================================
+// FORMS
+// ============================================
+
+input,
+textarea,
+select {
+  @include input-reset;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-text;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  @include smooth-transition(border-color, box-shadow);
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: $color-border-dark;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: $color-background;
+    color: $color-text-muted;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &.error {
+    border-color: $color-error;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($color-error, 0.1);
+    }
+  }
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%23333' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $spacing-md center;
+  background-size: 12px;
+  padding-right: calc($spacing-md * 2.5);
+}
+
+label {
+  display: block;
+  margin-bottom: $spacing-xs;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text;
+}
+
+// ============================================
+// IMAGES
+// ============================================
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// ============================================
+// LAYOUT UTILITIES
+// ============================================
+
+.container {
+  @include container;
+}
+
+.section {
+  @include section-spacing;
 }
 
 .main-content {
-    flex-grow: 1;
-    padding: $spacing-md;
+  flex: 1 0 auto;
+  width: 100%;
+  @include container;
+  padding-top: $spacing-xl;
+  padding-bottom: $spacing-2xl;
 
-    @include desktop {
-        padding: $spacing-lg $spacing-md;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
+  @include tablet {
+    padding-top: $spacing-2xl;
+    padding-bottom: $spacing-3xl;
+  }
+}
+
+// ============================================
+// UTILITY CLASSES
+// ============================================
+
+.sr-only {
+  @include sr-only;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-muted {
+  color: $color-text-muted;
+}
+
+.text-primary {
+  color: $color-primary;
+}
+
+.text-error {
+  color: $color-error;
+}
+
+.text-success {
+  color: $color-success;
+}
+
+// Loading spinner
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid $color-border;
+  border-top-color: $color-primary;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+// Error message
+.error-message {
+  padding: $spacing-sm $spacing-md;
+  background-color: lighten($color-error, 45%);
+  color: $color-error;
+  border: 1px solid lighten($color-error, 30%);
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  margin-bottom: $spacing-md;
+}
+
+.success-message {
+  padding: $spacing-sm $spacing-md;
+  background-color: lighten($color-success, 55%);
+  color: darken($color-success, 10%);
+  border: 1px solid lighten($color-success, 30%);
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  margin-bottom: $spacing-md;
+}
+
+// Skeleton loader
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    $color-background 0px,
+    lighten($color-background, 2%) 40px,
+    $color-background 80px
+  );
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.2s ease-in-out infinite;
+}
+
+// Reduced motion
+@include reduced-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

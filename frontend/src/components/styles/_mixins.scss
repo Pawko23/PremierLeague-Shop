@@ -1,16 +1,27 @@
-// client/src/components/styles/_mixins.scss (POPRAWIONE)
-
+// frontend/src/components/styles/_mixins.scss
 @import "../../styles/variables";
 
+// RESPONSIVE
 @mixin mobile {
   @media (max-width: $breakpoint-mobile) {
     @content;
   }
 }
 
+@mixin mobile-only {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
 @mixin tablet {
-  // UWAGA: Używamy nawiasów ( ) do grupowania operacji matematycznych
   @media (min-width: ($breakpoint-mobile + 1)) and (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: ($breakpoint-mobile + 1)) {
     @content;
   }
 }
@@ -18,5 +29,281 @@
 @mixin desktop {
   @media (min-width: $breakpoint-desktop) {
     @content;
+  }
+}
+
+@mixin wide {
+  @media (min-width: $breakpoint-wide) {
+    @content;
+  }
+}
+
+@mixin respond-to($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// RESETS
+@mixin button-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+@mixin input-reset {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+@mixin focus-ring {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+@mixin focus-ring-inset {
+  outline: 2px solid $color-primary;
+  outline-offset: -2px;
+}
+
+// FLEXBOX
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// GRID
+@mixin grid-auto($min-width, $gap: $spacing-md) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+@mixin grid-responsive($mobile: 1, $tablet: 2, $desktop: 3, $gap: $spacing-md) {
+  display: grid;
+  grid-template-columns: repeat($mobile, 1fr);
+  gap: $gap;
+
+  @include tablet {
+    grid-template-columns: repeat($tablet, 1fr);
+  }
+
+  @include desktop {
+    grid-template-columns: repeat($desktop, 1fr);
+  }
+}
+
+// TYPOGRAPHY
+@mixin heading-1 {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: -0.02em;
+
+  @include tablet {
+    font-size: $font-size-4xl;
+  }
+}
+
+@mixin heading-2 {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: -0.01em;
+
+  @include tablet {
+    font-size: $font-size-3xl;
+  }
+}
+
+@mixin heading-3 {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-base;
+
+  @include tablet {
+    font-size: $font-size-2xl;
+  }
+}
+
+@mixin body-large {
+  font-size: $font-size-lg;
+  line-height: $line-height-relaxed;
+}
+
+@mixin body-base {
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
+@mixin body-small {
+  font-size: $font-size-sm;
+  line-height: $line-height-base;
+}
+
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// TRANSITIONS
+@mixin smooth-transition($properties...) {
+  transition-property: $properties;
+  transition-duration: $transition-base;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@mixin hover-lift {
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: $shadow-hover;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+// COMPONENTS
+@mixin card {
+  background: $color-surface;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-lg;
+}
+
+@mixin glass-effect {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+// ANIMATIONS
+@mixin fade-in($duration: $transition-base) {
+  animation: fadeIn $duration ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@mixin slide-in-up($duration: $transition-base) {
+  animation: slideInUp $duration ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+// ACCESSIBILITY
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+// LAYOUT
+@mixin container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $spacing-md;
+  padding-right: $spacing-md;
+
+  @include tablet-up {
+    padding-left: $spacing-lg;
+    padding-right: $spacing-lg;
+  }
+
+  @include desktop {
+    max-width: $container-xl;
+  }
+}
+
+@mixin section-spacing {
+  padding-top: $spacing-2xl;
+  padding-bottom: $spacing-2xl;
+
+  @include tablet {
+    padding-top: $spacing-3xl;
+    padding-bottom: $spacing-3xl;
+  }
+}
+
+@mixin aspect-ratio($width, $height) {
+  aspect-ratio: $width / $height;
+
+  @supports not (aspect-ratio: 1 / 1) {
+    &::before {
+      content: "";
+      float: left;
+      padding-top: calc($height / $width * 100%);
+    }
+    &::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
   }
 }

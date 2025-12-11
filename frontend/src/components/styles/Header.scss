@@ -1,62 +1,559 @@
-// client/src/components/styles/Header.scss
+// frontend/src/components/styles/Header.scss
+
 @import "./mixins";
 
 .header {
-    background-color: $color-text;
-    color: $color-text-light;
-    padding: $spacing-sm $spacing-md;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-sticky;
+  background-color: $color-text;
+  color: $color-text-light;
+  box-shadow: $shadow-sm;
+  //@include smooth-transition(box-shadow, transform);
+
+  &--scrolled {
+    box-shadow: $shadow-lg;
+  }
+
+  &__container {
+    //@include container;
     display: flex;
     justify-content: space-between;
+    height: 64px;
+    gap: $spacing-md;
+
+    // @include tablet {
+    //   height: 72px;
+    // }
+  }
+
+  // ============================================
+  // LOGO
+  // ============================================
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-sm;
+    color: $color-text-light;
+    font-weight: $font-weight-bold;
+    text-decoration: none;
+    //@include smooth-transition(transform, opacity);
+
+    &:hover {
+      transform: scale(1.02);
+      opacity: 0.9;
+      text-decoration: none;
+    }
+
+    &:focus-visible {
+      //@include focus-ring;
+      border-radius: $radius-md;
+    }
+  }
+
+  &__logo-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+
+    // @include tablet {
+    //   width: 36px;
+    //   height: 36px;
+    // }
+  }
+
+  &__logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    line-height: 1.1;
+  }
+
+  &__logo-primary {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    letter-spacing: -0.02em;
+
+    // @include tablet {
+    //   font-size: $font-size-xl;
+    // }
+  }
+
+  &__logo-secondary {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-normal;
+    color: $color-secondary;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    // @include tablet {
+    //   font-size: $font-size-sm;
+    // }
+  }
+
+  // ============================================
+  // NAVIGATION
+  // ============================================
+
+  &__nav {
+    display: none;
     align-items: center;
-    flex-wrap: wrap; 
-    
-    &__logo a {
-        color: $color-text-light;
-        font-size: 1.5rem;
-        font-weight: bold;
+    gap: $spacing-xs;
+    flex: 1;
+    margin-left: $spacing-lg;
+
+    // @include desktop {
+    //   display: flex;
+    // }
+  }
+
+  &__nav-link {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    color: $color-text-light;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    border-radius: $radius-md;
+    //@include smooth-transition(background-color, color);
+
+    &:hover {
+      background-color: rgba($color-text-light, 0.1);
+      color: $color-secondary;
+      text-decoration: none;
     }
 
-    &__nav {
-        display: flex; // Ukryte na mobile domyślnie
-        
-        @include tablet {
-            display: flex;
-            gap: $spacing-sm;
-            margin: 0 $spacing-md;
-        }
-
-        a {
-            color: $color-text-light;
-            &:hover { color: $color-secondary; text-decoration: none; }
-        }
+    &:focus-visible {
+      outline: 2px solid $color-secondary;
+      outline-offset: 2px;
     }
 
-    &__actions {
-        display: flex;
-        align-items: center;
-        gap: $spacing-sm;
-        
-        button {
-            background: transparent;
-            border: 1px solid $color-primary;
-            color: $color-primary;
-            padding: 4px 8px;
+    &--admin {
+      color: $color-secondary;
+    }
+  }
 
-            &:hover {
-                background-color: $color-primary;
-                color: $color-text-light;
-            }
-        }
-        
-        @include mobile {
-            width: 100%;
-            justify-content: flex-end;
-            margin-top: $spacing-xs;
-        }
+  &__nav-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  // ============================================
+  // ACTIONS
+  // ============================================
+
+  &__actions {
+    //@include flex-center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  // Cart Button
+  &__cart-button {
+    position: relative;
+    //@include flex-center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    color: $color-text-light;
+    border-radius: $radius-md;
+    //@include smooth-transition(background-color, transform);
+
+    &:hover {
+      background-color: rgba($color-text-light, 0.1);
+      transform: scale(1.05);
+      text-decoration: none;
     }
-    
-    &__cart {
-        color: $color-secondary;
-        font-weight: bold;
+
+    &:focus-visible {
+      outline: 2px solid $color-secondary;
+      outline-offset: 2px;
     }
+  }
+
+  &__cart-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__cart-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    //@include flex-center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 4px;
+    background-color: $color-primary;
+    color: $color-text-light;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    border-radius: $radius-full;
+    border: 2px solid $color-text;
+    animation: cartBadgePulse 0.3s ease-out;
+  }
+
+  @keyframes cartBadgePulse {
+    0% {
+      transform: scale(0.8);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  // User Menu
+  &__user-menu {
+    position: relative;
+    display: none;
+
+    // @include desktop {
+    //   display: block;
+    // }
+
+    &:hover &__user-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  &__user-button {
+    //@include flex-center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    color: $color-text-light;
+    background-color: rgba($color-text-light, 0.05);
+    border: 1px solid rgba($color-text-light, 0.1);
+    border-radius: $radius-md;
+    cursor: pointer;
+    //@include smooth-transition(background-color, border-color);
+
+    &:hover {
+      background-color: rgba($color-text-light, 0.1);
+      border-color: rgba($color-text-light, 0.2);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-secondary;
+      outline-offset: 2px;
+    }
+  }
+
+  &__user-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  &__user-email {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    max-width: 150px;
+    //@include text-truncate;
+  }
+
+  &__user-dropdown {
+    position: absolute;
+    top: calc(100% + $spacing-xs);
+    right: 0;
+    min-width: 200px;
+    background-color: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    //@include smooth-transition(opacity, visibility, transform);
+    overflow: hidden;
+  }
+
+  &__dropdown-link {
+    //@include flex-center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-sm;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    color: $color-text;
+    font-size: $font-size-sm;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    //@include smooth-transition(background-color);
+
+    svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      background-color: $color-background;
+      text-decoration: none;
+    }
+
+    // &:focus-visible {
+    //   @include focus-ring-inset;
+    // }
+  }
+
+  // Login Button
+  &__login-button {
+    //@include flex-center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-md;
+    color: $color-text;
+    background-color: $color-secondary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    border-radius: $radius-md;
+    text-decoration: none;
+    //@include smooth-transition(background-color, transform);
+
+    &:hover {
+      background-color: $color-secondary-hover;
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-secondary;
+      outline-offset: 2px;
+    }
+
+    span {
+      display: none;
+
+    //   @include tablet {
+    //     display: inline;
+    //   }
+    }
+  }
+
+  &__login-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  // ============================================
+  // MOBILE MENU TOGGLE
+  // ============================================
+
+  &__mobile-toggle {
+    //@include flex-column;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    background-color: transparent;
+    border: none;
+    border-radius: $radius-md;
+    cursor: pointer;
+    //@include smooth-transition(background-color);
+
+    // @include desktop {
+    //   display: none;
+    // }
+
+    &:hover {
+      background-color: rgba($color-text-light, 0.1);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-secondary;
+      outline-offset: 2px;
+    }
+
+    &--open {
+      .header__mobile-toggle-line {
+        &:nth-child(1) {
+          transform: translateY(7px) rotate(45deg);
+        }
+
+        &:nth-child(2) {
+          opacity: 0;
+          transform: scaleX(0);
+        }
+
+        &:nth-child(3) {
+          transform: translateY(-7px) rotate(-45deg);
+        }
+      }
+    }
+  }
+
+  &__mobile-toggle-line {
+    width: 24px;
+    height: 2px;
+    background-color: $color-text-light;
+    border-radius: $radius-full;
+    //@include smooth-transition(transform, opacity);
+  }
+
+  // ============================================
+  // MOBILE MENU
+  // ============================================
+
+  &__mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($color-text, 0.7);
+    z-index: $z-modal-backdrop;
+    animation: fadeIn $transition-base;
+
+    // @include desktop {
+    //   display: none;
+    // }
+  }
+
+  &__mobile-menu {
+    position: fixed;
+    top: 64px;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    max-width: 85vw;
+    background-color: $color-surface;
+    box-shadow: $shadow-xl;
+    z-index: $z-modal;
+    padding: $spacing-md;
+    overflow-y: auto;
+    transform: translateX(100%);
+    //@include smooth-transition(transform);
+
+    // @include desktop {
+    //   display: none;
+    // }
+
+    &--open {
+      transform: translateX(0);
+    }
+  }
+
+  &__mobile-link {
+    //@include flex-center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: $spacing-md;
+    width: 100%;
+    padding: $spacing-md;
+    color: $color-text;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    border-radius: $radius-md;
+    text-align: left;
+    cursor: pointer;
+    //@include smooth-transition(background-color);
+
+    svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      background-color: $color-background;
+      text-decoration: none;
+    }
+
+    &:focus-visible {
+      //@include focus-ring-inset;
+    }
+
+    &--logout {
+      color: $color-error;
+      margin-top: $spacing-sm;
+    }
+
+    & + & {
+      margin-top: $spacing-xs;
+    }
+  }
+
+  &__mobile-divider {
+    height: 1px;
+    background-color: $color-border;
+    margin: $spacing-md 0;
+  }
+
+  &__mobile-user {
+    //@include flex-center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background-color: $color-background;
+    border-radius: $radius-md;
+    margin-bottom: $spacing-md;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      stroke: $color-primary;
+    }
+
+    span {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      color: $color-text-secondary;
+      //@include text-truncate;
+    }
+  }
+
+  // ============================================
+  // ANIMATIONS
+  // ============================================
+
+//   @include reduced-motion {
+//     &,
+//     &__cart-badge,
+//     &__mobile-overlay,
+//     &__mobile-menu {
+//       animation: none;
+//       transition: none;
+//     }
+
+//     &__user-dropdown {
+//       transition: none;
+//     }
+//   }
 }

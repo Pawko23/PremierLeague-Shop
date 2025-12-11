@@ -1,95 +1,106 @@
-// client/src/pages/styles/OrdersHistoryPage.scss
+// frontend/src/pages/styles/OrdersHistoryPage.scss
 @import "../../components/styles/mixins";
-@import "../../styles/variables";
 
 .orders-history {
-    max-width: 900px;
-    margin: 0 auto;
-    
-    h1 {
-        text-align: center;
-        color: $color-primary;
-        margin-bottom: $spacing-lg;
-    }
-}
+  max-width: 900px;
+  margin: 0 auto;
 
-.orders-history--empty {
+  h1 {
+    @include heading-1;
     text-align: center;
-    padding: $spacing-lg 0;
+    margin-bottom: $spacing-2xl;
+  }
+
+  &--empty {
+    text-align: center;
+    padding: $spacing-3xl $spacing-md;
 
     h1 {
-        color: $color-primary;
+      @include heading-2;
+      margin-bottom: $spacing-md;
     }
-    
+
     p {
-        margin: $spacing-sm 0;
+      @include body-large;
+      color: $color-text-secondary;
+      margin-bottom: $spacing-xl;
     }
+  }
 }
 
 .order-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    padding: $spacing-md;
+  background: $color-surface;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-lg;
+  border-left: 4px solid $color-border;
+  box-shadow: $shadow-sm;
+  @include smooth-transition(box-shadow);
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+
+  &--pending { border-left-color: $color-warning; }
+  &--processing { border-left-color: $color-info; }
+  &--shipped { border-left-color: $color-success; }
+  &--delivered { 
+    border-left-color: $color-primary; 
+    background: linear-gradient(to right, $color-primary-light, $color-surface);
+  }
+  &--cancelled { border-left-color: $color-error; }
+
+  &__header {
+    @include flex-between;
     margin-bottom: $spacing-md;
-    border-left: 5px solid gray; // Domyślny border
+    padding-bottom: $spacing-sm;
+    border-bottom: 1px solid $color-border-light;
 
-    // Stylizacja w zależności od statusu (do zmiany przez PUT /api/admin/orders/:id/status)
-    &--pending {
-        border-left-color: #ffc107; // Żółty (Oczekujące)
-    }
-    &--processing {
-        border-left-color: $color-secondary; // Zielony (W realizacji)
-    }
-    &--shipped {
-        border-left-color: #4CAF50; // Zielony (Wysłane)
-    }
-    &--delivered {
-        border-left-color: $color-primary; // Czerwony (Dostarczone - sukces)
-        box-shadow: 0 4px 10px rgba($color-primary, 0.2);
-    }
-    &--cancelled {
-        border-left-color: #6c757d; // Szary (Anulowane)
+    @include mobile {
+      flex-direction: column;
+      gap: $spacing-xs;
+      align-items: flex-start;
     }
 
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.9rem;
-        color: gray;
-        margin-bottom: $spacing-sm;
-        border-bottom: 1px dashed $color-border;
-        padding-bottom: $spacing-xs;
+    span {
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
     }
+  }
 
-    &__details {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: $spacing-sm;
-        
-        p {
-            margin: 0;
-        }
+  &__details {
+    @include flex-between;
+    margin-bottom: $spacing-md;
+
+    @include mobile {
+      flex-direction: column;
+      gap: $spacing-sm;
+      align-items: flex-start;
     }
-    
-    &__status {
-        font-weight: bold;
-        text-transform: uppercase;
+  }
+
+  &__status {
+    display: inline-block;
+    padding: $spacing-xs $spacing-md;
+    background: $color-background;
+    border-radius: $radius-full;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+  }
+
+  &__items-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: $spacing-xs 0;
+      color: $color-text-secondary;
+      border-bottom: 1px dotted $color-border-light;
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
-    
-    &__items-list {
-        list-style: none;
-        padding: 0;
-        li {
-            padding: 4px 0;
-            font-size: 0.95rem;
-            color: $color-text;
-            border-bottom: 1px dotted lighten($color-border, 5%);
-            
-            &:last-child {
-                border-bottom: none;
-            }
-        }
-    }
+  }
 }
